@@ -13,8 +13,8 @@ const Proyectos = () => {
       titulo: "Tienda Web - TLS Regalos Perú",
       descripcion: "Tienda web de regalos personalizados: photobooks, cuadros y boxes.",
       tecnologias: ["HTML5", "CSS3", "JavaScript"],
-      linkDemo: "#",
-      linkCodigo: "#"
+      linkDemo: "https://true-love-store-web.vercel.app",
+      linkCodigo: "https://github.com/thairwazan20-cmd/TRUE-LOVE-STORE-_WEB"
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ const Proyectos = () => {
       descripcion: "Portafolio profesional con tema oscuro, construido con componentes de React.",
       tecnologias: ["React", "Vite", "CSS3", "Grid", "Flexbox"],
       linkDemo: "#",
-      linkCodigo: "#"
+      linkCodigo: "https://github.com/thairwazan20-cmd/portafolio"
     },
     {
       id: 3,
