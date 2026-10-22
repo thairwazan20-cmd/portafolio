@@ -1,0 +1,11 @@
+/* Reseteo básico de márgenes para que la barra ocupe el 100% de la pantalla */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
