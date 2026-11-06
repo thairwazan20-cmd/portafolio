@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import './Banner.css';
 import miFoto from '../../assets/miFoto.png';
 import NeuralCanvas from './NeuralCanvas';
+import { LogoGitHub, LogoLinkedIn, LogoWhatsApp, devicon } from '../Iconos/Iconos';
+import { GITHUB_URL, LINKEDIN_URL, WHATSAPP_URL } from '../../data/contacto';
 
 // Roles que se escriben y borran automáticamente
 const roles = [
@@ -12,7 +14,11 @@ const roles = [
   'Soporte Técnico',
 ];
 
-const GITHUB_URL = 'https://github.com/thairwazan20-cmd';
+const redes = [
+  { nombre: 'GitHub', url: GITHUB_URL, Logo: LogoGitHub, clase: 'is-github' },
+  { nombre: 'LinkedIn', url: LINKEDIN_URL, Logo: LogoLinkedIn, clase: 'is-linkedin' },
+  { nombre: 'WhatsApp', url: WHATSAPP_URL, Logo: LogoWhatsApp, clase: 'is-whatsapp' },
+];
 
 const Banner = ({ listo }) => {
   const [rolIndex, setRolIndex] = useState(0);
@@ -86,9 +92,13 @@ const Banner = ({ listo }) => {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
             </a>
             <a href="#contacto" className="btn btn-ghost">Contáctame</a>
-            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="hero-social" aria-label="GitHub">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.75 5.48.75 11.75c0 4.97 3.22 9.18 7.69 10.67.56.1.77-.24.77-.54v-1.9c-3.13.68-3.79-1.51-3.79-1.51-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.24 1.16-3.03-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.16a10.7 10.7 0 0 1 5.64 0c2.15-1.46 3.1-1.16 3.1-1.16.61 1.55.23 2.7.11 2.98.72.79 1.16 1.8 1.16 3.03 0 4.33-2.64 5.28-5.15 5.56.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.78.54a11.26 11.26 0 0 0 7.68-10.67C23.25 5.48 18.27.5 12 .5Z" /></svg>
-            </a>
+            <div className="hero-socials">
+              {redes.map(({ nombre, url, Logo, clase }) => (
+                <a key={nombre} href={url} target="_blank" rel="noopener noreferrer" className={`hero-social ${clase}`} aria-label={nombre} title={nombre}>
+                  <Logo size={21} />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* 6. Mini estadísticas */}
@@ -104,14 +114,31 @@ const Banner = ({ listo }) => {
           <div className="profile-orbit">
             <div className="profile-ring" />
             <div className="profile-photo-container">
-              {/* Reemplaza src/assets/miFoto.png por tu foto cuadrada (ej. 600x600px) */}
-              <img src={miFoto} alt="Thair Bazan" className="profile-photo" />
+              <img src={miFoto} alt="Foto de Thair Bazan Becerra" className="profile-photo" />
             </div>
 
-            <span className="floating-chip chip-1">⚛ React</span>
-            <span className="floating-chip chip-2">🤖 IA / ML</span>
-            <span className="floating-chip chip-3">🐍 Python</span>
-            <span className="floating-chip chip-4">{'{ JS }'}</span>
+            <span className="floating-chip chip-1">
+              <img src={devicon('react')} alt="" width="18" height="18" /> React
+            </span>
+            <span className="floating-chip chip-2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#ia-grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <defs>
+                  <linearGradient id="ia-grad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stopColor="#22d3ee" />
+                    <stop offset="1" stopColor="#a78bfa" />
+                  </linearGradient>
+                </defs>
+                <rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" />
+                <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3" />
+              </svg>
+              IA / ML
+            </span>
+            <span className="floating-chip chip-3">
+              <img src={devicon('python')} alt="" width="18" height="18" /> Python
+            </span>
+            <span className="floating-chip chip-4">
+              <img src={devicon('javascript')} alt="" width="18" height="18" /> JavaScript
+            </span>
           </div>
 
           {/* Tarjeta de código flotante */}

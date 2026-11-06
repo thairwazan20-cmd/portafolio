@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './Contacto.css';
+import { LogoGitHub, LogoGmail, LogoLinkedIn, LogoWhatsApp, IconoTelefono, IconoUbicacion } from '../Iconos/Iconos';
+import { EMAIL, TELEFONO, WHATSAPP_URL, LINKEDIN_URL, GITHUB_URL, UBICACION } from '../../data/contacto';
 
-// ⚠️ Cambia este correo por el tuyo: se usa en la tarjeta y en el envío del formulario
-const EMAIL = 'tu-correo@email.com';
-const GITHUB_URL = 'https://github.com/thairwazan20-cmd';
+// Canales de contacto (se recorren con .map())
+const canales = [
+  { id: 'email', etiqueta: 'Email', valor: EMAIL, url: `mailto:${EMAIL}`, Icono: LogoGmail, clase: 'is-gmail', copiable: true },
+  { id: 'whatsapp', etiqueta: 'WhatsApp', valor: TELEFONO, url: WHATSAPP_URL, Icono: LogoWhatsApp, clase: 'is-whatsapp' },
+  { id: 'telefono', etiqueta: 'Teléfono', valor: TELEFONO, url: `tel:${TELEFONO.replace(/\s/g, '')}`, Icono: IconoTelefono, clase: 'is-phone' },
+  { id: 'linkedin', etiqueta: 'LinkedIn', valor: 'Thair Bazán Becerra', url: LINKEDIN_URL, Icono: LogoLinkedIn, clase: 'is-linkedin' },
+  { id: 'github', etiqueta: 'GitHub', valor: 'thairwazan20-cmd', url: GITHUB_URL, Icono: LogoGitHub, clase: 'is-github' },
+  { id: 'ubicacion', etiqueta: 'Ubicación', valor: UBICACION, url: null, Icono: IconoUbicacion, clase: 'is-location' },
+];
 
 const Contacto = () => {
   // Estado centralizado para el formulario (Formulario Controlado)
@@ -12,8 +20,9 @@ const Contacto = () => {
     email: '',
     mensaje: '',
   });
-  const [enviado, setEnviado] = useState(false);
+  const [toast, setToast] = useState({ texto: '', visible: false });
   const [copiado, setCopiado] = useState(false);
+  const formRef = useRef(null);
 
   // Función para manejar los cambios en los inputs
   const manejarCambio = (e) => {
@@ -24,7 +33,15 @@ const Contacto = () => {
     });
   };
 
-  // Envío: abre el cliente de correo con el mensaje ya redactado
+  const mostrarToast = (texto) => {
+    setToast({ texto, visible: true });
+    // Sólo ocultamos (mantenemos el texto para que no desaparezca durante la animación de salida)
+    setTimeout(() => setToast((t) => ({ ...t, visible: false })), 4500);
+  };
+
+  const limpiar = () => setFormulario({ nombre: '', email: '', mensaje: '' });
+
+  // Opción 1: enviar por correo (abre el cliente de correo con el mensaje redactado)
   const manejarEnvio = (e) => {
     e.preventDefault();
     const asunto = encodeURIComponent(`Contacto desde el portafolio — ${formulario.nombre}`);
@@ -32,11 +49,19 @@ const Contacto = () => {
       `${formulario.mensaje}\n\n— ${formulario.nombre} (${formulario.email})`
     );
     window.location.href = `mailto:${EMAIL}?subject=${asunto}&body=${cuerpo}`;
+    mostrarToast('¡Gracias por tu mensaje! Te contactaré pronto.');
+    limpiar();
+  };
 
-    setEnviado(true);
-    setTimeout(() => setEnviado(false), 4500);
-    // Limpiamos el formulario después de enviar
-    setFormulario({ nombre: '', email: '', mensaje: '' });
+  // Opción 2: enviar por WhatsApp (valida el formulario y abre el chat)
+  const enviarWhatsApp = () => {
+    if (!formRef.current.reportValidity()) return;
+    const texto = encodeURIComponent(
+      `Hola Thair, soy ${formulario.nombre} (${formulario.email}).\n\n${formulario.mensaje}`
+    );
+    window.open(`${WHATSAPP_URL}?text=${texto}`, '_blank', 'noopener,noreferrer');
+    mostrarToast('Abriendo WhatsApp… ¡gracias por escribirme!');
+    limpiar();
   };
 
   const copiarEmail = async () => {
@@ -74,7 +99,7 @@ const Contacto = () => {
               </div>
               <div className="info-terminal-body">
                 <p><span className="prompt">$</span> whoami</p>
-                <p className="out">Thair Bazan · Software Engineer &amp; AI</p>
+                <p className="out">Thair Bazan Becerra · Software Engineer &amp; AI</p>
                 <p><span className="prompt">$</span> status</p>
                 <p className="out ok">● Abierto a prácticas, freelance y colaboraciones</p>
                 <p><span className="prompt">$</span> <span className="cursor-blink">_</span></p>
@@ -82,46 +107,42 @@ const Contacto = () => {
             </div>
 
             <div className="info-items">
-              {/* Ítem Email */}
-              <button type="button" className="glow-card info-item" onClick={copiarEmail}>
-                <div className="info-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                  </svg>
-                </div>
-                <div>
-                  <span className="item-label">Email {copiado ? '· ¡Copiado!' : '· clic para copiar'}</span>
-                  <p className="item-text">{EMAIL}</p>
-                </div>
-              </button>
+              {canales.map(({ id, etiqueta, valor, url, Icono, clase, copiable }) => {
+                const contenido = (
+                  <>
+                    <div className="info-icon"><Icono size={20} /></div>
+                    <div className="info-texto">
+                      <span className="item-label">{etiqueta}</span>
+                      <p className="item-text">{valor}</p>
+                    </div>
+                    {url && (
+                      <svg className="info-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
+                    )}
+                  </>
+                );
 
-              {/* Ítem GitHub */}
-              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="glow-card info-item">
-                <div className="info-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                  </svg>
-                </div>
-                <div>
-                  <span className="item-label">GitHub</span>
-                  <p className="item-text">thairwazan20-cmd</p>
-                </div>
-              </a>
-
-              {/* Ítem Ubicación */}
-              <div className="glow-card info-item">
-                <div className="info-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                </div>
-                <div>
-                  <span className="item-label">Ubicación</span>
-                  <p className="item-text">Lima - Perú</p>
-                </div>
-              </div>
+                return (
+                  <div key={id} className={`glow-card info-item ${clase}`}>
+                    {url ? (
+                      <a
+                        href={url}
+                        className="info-link"
+                        target={url.startsWith('http') ? '_blank' : undefined}
+                        rel="noopener noreferrer"
+                      >
+                        {contenido}
+                      </a>
+                    ) : (
+                      <div className="info-link">{contenido}</div>
+                    )}
+                    {copiable && (
+                      <button type="button" className="info-copy" onClick={copiarEmail} aria-label="Copiar correo">
+                        {copiado ? '✓ Copiado' : 'Copiar'}
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -129,7 +150,10 @@ const Contacto = () => {
               COLUMNA DERECHA: FORMULARIO
           ====================================== */}
           <div className="glow-card contacto-form-wrapper reveal" style={{ '--delay': '0.12s' }}>
-            <form onSubmit={manejarEnvio} className="contacto-form">
+            <h3 className="form-title">Envíame un mensaje</h3>
+            <p className="form-desc">Elige si prefieres enviarlo por correo o por WhatsApp.</p>
+
+            <form ref={formRef} onSubmit={manejarEnvio} className="contacto-form">
               <div className="form-row">
                 <div className="form-group">
                   <input
@@ -175,19 +199,25 @@ const Contacto = () => {
                 <span className="char-count">{formulario.mensaje.length}/1000</span>
               </div>
 
-              <button type="submit" className="btn btn-primary btn-submit">
-                Enviar Mensaje
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
-              </button>
+              <div className="form-actions">
+                <button type="submit" className="btn btn-primary btn-submit">
+                  <LogoGmail size={18} />
+                  Enviar por correo
+                </button>
+                <button type="button" className="btn btn-whatsapp" onClick={enviarWhatsApp}>
+                  <LogoWhatsApp size={18} />
+                  Enviar por WhatsApp
+                </button>
+              </div>
             </form>
           </div>
         </div>
       </div>
 
       {/* Notificación de envío */}
-      <div className={`toast ${enviado ? 'show' : ''}`} role="status" aria-live="polite">
+      <div className={`toast ${toast.visible ? 'show' : ''}`} role="status" aria-live="polite">
         <span className="toast-icon">✓</span>
-        ¡Gracias por tu mensaje! Te contactaré pronto.
+        {toast.texto}
       </div>
     </section>
   );

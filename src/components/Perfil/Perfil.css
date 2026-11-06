@@ -1,8 +1,229 @@
 .sobre-mi-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.sobre-mi-col {
+  display: flex;
+  flex-direction: column;
   gap: 24px;
 }
+
+/* =========================================
+   TARJETA DE IDENTIDAD (foto)
+========================================= */
+.id-card {
+  position: sticky;
+  top: 100px;
+  padding: 2px;
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg), 0 0 60px -20px rgba(34, 211, 238, 0.55);
+  transition: transform 0.6s var(--ease), box-shadow 0.6s;
+}
+/* Borde degradado animado (en pseudo-elemento para no chocar con .reveal) */
+.id-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(from var(--ang, 0deg), var(--cyan), var(--violet), var(--pink), var(--cyan));
+  animation: id-border 6s linear infinite;
+}
+.id-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg), 0 0 80px -16px rgba(167, 139, 250, 0.6);
+}
+@property --ang {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes id-border {
+  to { --ang: 360deg; }
+}
+
+.id-card-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+
+.id-photo {
+  position: relative;
+  aspect-ratio: 4 / 4.6;
+  overflow: hidden;
+  background: #f4f4f4;
+}
+.id-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 15%;
+  transition: transform 1s var(--ease), filter 1s;
+}
+.id-card:hover .id-photo img { transform: scale(1.05); }
+
+/* Degradado inferior para fundir la foto con la tarjeta */
+.id-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10, 14, 24, 0) 55%, rgba(10, 14, 24, 0.85) 92%, var(--bg-2) 100%),
+    linear-gradient(135deg, rgba(34, 211, 238, 0.12), transparent 40%, rgba(167, 139, 250, 0.14));
+  pointer-events: none;
+}
+
+/* Línea de escaneo tipo IA */
+.id-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  z-index: 2;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  box-shadow: 0 0 16px 2px rgba(34, 211, 238, 0.7);
+  animation: id-scan 4s var(--ease) infinite;
+}
+.id-scan::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  height: 60px;
+  background: linear-gradient(0deg, rgba(34, 211, 238, 0.18), transparent);
+}
+@keyframes id-scan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 92%; opacity: 0; }
+}
+
+/* Esquinas de visor */
+.id-corner {
+  position: absolute;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--cyan);
+  filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.8));
+  transition: transform 0.5s var(--ease);
+}
+.id-corner.tl { top: 14px; left: 14px; border-right: 0; border-bottom: 0; border-radius: 6px 0 0 0; }
+.id-corner.tr { top: 14px; right: 14px; border-left: 0; border-bottom: 0; border-radius: 0 6px 0 0; }
+.id-corner.bl { bottom: 14px; left: 14px; border-right: 0; border-top: 0; border-radius: 0 0 0 6px; }
+.id-corner.br { bottom: 14px; right: 14px; border-left: 0; border-top: 0; border-radius: 0 0 6px 0; }
+.id-card:hover .id-corner.tl { transform: translate(-4px, -4px); }
+.id-card:hover .id-corner.tr { transform: translate(4px, -4px); }
+.id-card:hover .id-corner.bl { transform: translate(-4px, 4px); }
+.id-card:hover .id-corner.br { transform: translate(4px, 4px); }
+
+.id-tag,
+.id-status {
+  position: absolute;
+  z-index: 3;
+  top: 46px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border-radius: 6px;
+  background: rgba(5, 7, 13, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.id-tag {
+  left: 40px;
+  color: var(--cyan);
+  border: 1px solid rgba(34, 211, 238, 0.35);
+}
+.id-status {
+  right: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--green);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+}
+.id-status i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse-dot 2s infinite;
+}
+
+.id-info {
+  position: relative;
+  z-index: 2;
+  margin-top: -40px;
+  padding: 0 26px 26px;
+  text-align: center;
+}
+.id-info h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.id-verified { color: var(--cyan); flex-shrink: 0; }
+.id-rol {
+  margin-top: 4px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+.id-ubicacion {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.id-redes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.id-red {
+  --brand: var(--cyan);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--brand) 35%, transparent);
+  transition: transform 0.35s var(--ease), background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.id-red.is-linkedin { --brand: #0a66c2; color: #3b8fe0; }
+.id-red.is-github { --brand: #ffffff; }
+.id-red.is-whatsapp { --brand: #25d366; }
+.id-red.is-gmail { --brand: #ea4335; }
+.id-red:hover {
+  color: #fff;
+  background: var(--brand);
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 10px 24px -8px var(--brand);
+}
+.id-red.is-github:hover { color: #0d1117; }
 
 .perfil-card {
   padding: 36px;
@@ -197,6 +418,13 @@
 
 @media (max-width: 992px) {
   .sobre-mi-grid { grid-template-columns: 1fr; }
+  .id-card {
+    position: relative;
+    top: 0;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
   .servicios-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {

@@ -152,7 +152,14 @@
   margin-bottom: 48px;
 }
 
+.hero-socials {
+  display: flex;
+  gap: 10px;
+}
+
+/* Redes sociales: se pintan con el color oficial de cada marca al pasar el mouse */
 .hero-social {
+  --brand: var(--cyan);
   display: grid;
   place-items: center;
   width: 50px;
@@ -161,14 +168,19 @@
   color: var(--text-muted);
   border: 1px solid var(--border-strong);
   background: var(--surface);
-  transition: transform 0.35s var(--ease), color 0.3s, border-color 0.3s, box-shadow 0.3s;
+  transition: transform 0.35s var(--ease), color 0.3s, border-color 0.3s, box-shadow 0.3s, background 0.3s;
 }
+.hero-social.is-github { --brand: #ffffff; }
+.hero-social.is-linkedin { --brand: #0a66c2; }
+.hero-social.is-whatsapp { --brand: #25d366; }
 .hero-social:hover {
-  color: var(--text);
-  border-color: var(--violet);
-  transform: translateY(-3px) rotate(-8deg);
-  box-shadow: var(--glow-violet);
+  color: #fff;
+  background: var(--brand);
+  border-color: var(--brand);
+  transform: translateY(-4px) rotate(-8deg);
+  box-shadow: 0 12px 28px -8px var(--brand);
 }
+.hero-social.is-github:hover { color: #0d1117; }
 
 .hero-stats {
   list-style: none;
@@ -234,12 +246,16 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 18%;
   transition: transform 0.8s var(--ease);
 }
 .profile-orbit:hover .profile-photo { transform: scale(1.06); }
 
 .floating-chip {
   position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 8px 14px;
   font-family: var(--font-mono);
   font-size: 0.8rem;
@@ -257,7 +273,8 @@
 .chip-1 { top: 6%; left: -10%; border-color: rgba(34, 211, 238, 0.4); }
 .chip-2 { top: 18%; right: -14%; animation-delay: -1.5s; border-color: rgba(167, 139, 250, 0.45); }
 .chip-3 { bottom: 14%; left: -16%; animation-delay: -3s; border-color: rgba(251, 191, 36, 0.4); }
-.chip-4 { bottom: 2%; right: -2%; animation-delay: -2s; color: var(--yellow); }
+.chip-4 { top: 54%; right: -20%; animation-delay: -2s; border-color: rgba(247, 223, 30, 0.4); }
+.floating-chip img { width: 18px; height: 18px; }
 
 /* ---------- Tarjeta de código ---------- */
 .code-card {
@@ -381,4 +398,5 @@
   .chip-1 { left: -4%; }
   .chip-2 { right: -6%; }
   .chip-3 { left: -8%; }
+  .chip-4 { right: -8%; }
 }

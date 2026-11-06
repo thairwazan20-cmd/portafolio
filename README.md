@@ -26,6 +26,7 @@ src/components/
 ```
 
 ## Personalizar
-- Foto: reemplaza `src/assets/miFoto.png` (cuadrada, ej. 600x600).
+- Datos de contacto (correo, teléfono, WhatsApp, LinkedIn, GitHub): todo está en `src/data/contacto.js`.
+- Foto: `src/assets/miFoto.png` (se usa en el Hero y en la tarjeta de identidad de "Sobre mí").
 - Proyectos: reemplaza `src/assets/proyecto-*.png` por capturas reales y edita `linkDemo` / `linkCodigo` en `Proyectos.jsx` (si un enlace es `'#'`, el botón aparece deshabilitado).
-- Correo: cambia la constante `EMAIL` en `src/components/Contacto/Contacto.jsx`.
+- Logos: marcas en `src/components/Iconos/Iconos.jsx` (Simple Icons) y tecnologías con Devicon.
