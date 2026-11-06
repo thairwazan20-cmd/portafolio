@@ -1,0 +1,56 @@
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  border-radius: 50%;
+  transition: opacity 0.3s;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan), 0 0 22px rgba(34, 211, 238, 0.6);
+}
+.cursor-dot.hover { background: #fff; }
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+}
+/* El aro dibujado va en un pseudo-elemento para poder escalarlo
+   sin interferir con el transform de posición */
+.cursor-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(34, 211, 238, 0.55);
+  transition: transform 0.35s var(--ease), background 0.35s, border-color 0.35s, border-radius 0.35s;
+}
+.cursor-ring.hover::before {
+  transform: scale(1.7);
+  background: rgba(167, 139, 250, 0.12);
+  border-color: var(--violet);
+  backdrop-filter: blur(1px);
+}
+.cursor-ring.down::before { transform: scale(0.75); }
+.cursor-ring.text::before {
+  transform: scaleX(0.08) scaleY(0.8);
+  border-radius: 2px;
+  background: var(--cyan);
+}
+
+.cursor-dot.visible,
+.cursor-ring.visible { opacity: 1; }
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring { display: none; }
+}
