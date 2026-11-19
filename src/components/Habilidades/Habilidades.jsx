@@ -134,7 +134,7 @@ const Habilidades = () => {
     <section id="tech-stack" className="section habilidades-section">
       <div className="container">
         <div className="section-head center reveal">
-          <span className="section-eyebrow">02 · Tech Stack</span>
+          <span className="section-eyebrow">03 · Tech Stack</span>
           <h2 className="section-title">
             Herramientas con las que <span className="text-gradient">construyo</span>
           </h2>

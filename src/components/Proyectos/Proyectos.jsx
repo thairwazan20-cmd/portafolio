@@ -76,7 +76,7 @@ const Proyectos = () => {
     <section id="proyectos" className="section proyectos-section">
       <div className="container">
         <div className="section-head reveal">
-          <span className="section-eyebrow">03 · Proyectos</span>
+          <span className="section-eyebrow">04 · Proyectos</span>
           <h2 className="section-title">
             Proyectos <span className="text-gradient">destacados</span>
           </h2>

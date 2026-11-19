@@ -3,10 +3,11 @@ import './Navbar.css';
 
 const enlaces = [
   { id: 'sobre-mi', texto: 'Perfil', num: '01' },
-  { id: 'tech-stack', texto: 'Tech Stack', num: '02' },
-  { id: 'proyectos', texto: 'Proyectos', num: '03' },
-  { id: 'certificados', texto: 'Certificados', num: '04' },
-  { id: 'contacto', texto: 'Contacto', num: '05' },
+  { id: 'experiencia', texto: 'Experiencia', num: '02' },
+  { id: 'tech-stack', texto: 'Tech Stack', num: '03' },
+  { id: 'proyectos', texto: 'Proyectos', num: '04' },
+  { id: 'certificados', texto: 'Certificados', num: '05' },
+  { id: 'contacto', texto: 'Contacto', num: '06' },
 ];
 
 const Navbar = () => {

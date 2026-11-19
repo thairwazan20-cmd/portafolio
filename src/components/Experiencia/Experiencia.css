@@ -1,0 +1,83 @@
+.experiencia-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.experiencia-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Funciones de cada trabajo */
+.exp-funciones {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+.exp-funciones li {
+  margin-bottom: 6px;
+}
+.exp-funciones li::marker {
+  color: var(--cyan);
+}
+
+/* Habilidades blandas */
+.blandas-lista {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+.blanda-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.3s, transform 0.35s var(--ease), background 0.3s;
+}
+.blanda-chip:hover {
+  transform: translateY(-3px);
+  border-color: rgba(167, 139, 250, 0.45);
+  background: var(--surface-2);
+}
+
+/* Idiomas */
+.idiomas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.idioma-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.idioma .skill-bar {
+  margin-top: 10px;
+  height: 5px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+.idioma .skill-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--gradient);
+}
+
+@media (max-width: 992px) {
+  .experiencia-grid { grid-template-columns: 1fr; }
+}

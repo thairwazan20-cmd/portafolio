@@ -78,7 +78,7 @@ const Contacto = () => {
     <section id="contacto" className="section contacto-section">
       <div className="container">
         <div className="section-head center reveal">
-          <span className="section-eyebrow">05 · Contacto</span>
+          <span className="section-eyebrow">06 · Contacto</span>
           <h2 className="section-title">
             Trabajemos <span className="text-gradient">juntos</span>
           </h2>

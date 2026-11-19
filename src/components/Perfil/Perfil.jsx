@@ -62,6 +62,18 @@ const educacion = [
     badge: '8 cursos',
     activo: false,
   },
+  {
+    titulo: 'Inglés — Básico 10',
+    lugar: 'IPCNA',
+    badge: 'Idiomas',
+    activo: false,
+  },
+  {
+    titulo: 'Educación Primaria y Secundaria',
+    lugar: 'Colegio Johannes Gutenberg',
+    badge: 'Concluida 2024',
+    activo: false,
+  },
 ];
 
 const Perfil = () => {
@@ -145,9 +157,10 @@ const Perfil = () => {
                 <strong> Ingeniería de Software con Inteligencia Artificial</strong>.
               </p>
               <p>
-                En mi trabajo me desempeño como <span className="hl">programador</span> y
-                <span className="hl"> diseñador de páginas web</span>, y también brindo
-                <span className="hl"> soporte técnico</span>.
+                Tengo experiencia laboral en <span className="hl">atención al cliente</span> y
+                <span className="hl"> trabajo en equipo</span>, y desarrollo
+                <span className="hl"> proyectos web</span> propios y para clientes, como la
+                tienda online de TLS Regalos Perú.
               </p>
               <p>
                 Actualmente estoy fortaleciendo mi perfil <strong>Fullstack</strong> con React,
@@ -158,7 +171,7 @@ const Perfil = () => {
             <ul className="perfil-datos">
               <li><span>Ubicación</span>{UBICACION}</li>
               <li><span>Enfoque</span>Frontend + IA</li>
-              <li><span>Idioma</span>Español</li>
+              <li><span>Idiomas</span>Español · Inglés básico</li>
               <li><span>Estado</span><em className="estado-ok">Disponible</em></li>
             </ul>
           </div>

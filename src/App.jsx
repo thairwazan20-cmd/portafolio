@@ -4,6 +4,7 @@ import Cursor from './components/Cursor/Cursor';
 import Navbar from './components/Navbar/Navbar';
 import Banner from './components/Banner/Banner';
 import Perfil from './components/Perfil/Perfil';
+import Experiencia from './components/Experiencia/Experiencia';
 import Habilidades from './components/Habilidades/Habilidades';
 import Proyectos from './components/Proyectos/Proyectos';
 import Certificados from './components/Certificados/Certificados';
@@ -57,6 +58,7 @@ function App() {
       <main>
         <Banner listo={!cargando} />
         <Perfil />
+        <Experiencia />
         <Habilidades />
         <Proyectos />
         <Certificados />
