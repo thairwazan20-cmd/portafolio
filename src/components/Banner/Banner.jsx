@@ -1,170 +1,121 @@
-import { useEffect, useState } from 'react';
 import './Banner.css';
 import miFoto from '../../assets/miFoto.png';
-import NeuralCanvas from './NeuralCanvas';
 import { LogoGitHub, LogoLinkedIn, LogoWhatsApp, devicon } from '../Iconos/Iconos';
 import { GITHUB_URL, LINKEDIN_URL, WHATSAPP_URL } from '../../data/contacto';
 
-// Roles que se escriben y borran automáticamente
-const roles = [
-  'Software Developer',
-  'Ingeniero de Software con IA',
-  'Frontend Developer · React',
-  'Diseñador Web',
-  'Soporte Técnico',
-];
-
 const redes = [
-  { nombre: 'GitHub', url: GITHUB_URL, Logo: LogoGitHub, clase: 'is-github' },
-  { nombre: 'LinkedIn', url: LINKEDIN_URL, Logo: LogoLinkedIn, clase: 'is-linkedin' },
-  { nombre: 'WhatsApp', url: WHATSAPP_URL, Logo: LogoWhatsApp, clase: 'is-whatsapp' },
+  { nombre: 'LinkedIn', url: LINKEDIN_URL, Logo: LogoLinkedIn },
+  { nombre: 'GitHub', url: GITHUB_URL, Logo: LogoGitHub },
+  { nombre: 'WhatsApp', url: WHATSAPP_URL, Logo: LogoWhatsApp },
 ];
 
-const Banner = ({ listo }) => {
-  const [rolIndex, setRolIndex] = useState(0);
-  const [texto, setTexto] = useState('');
-  const [borrando, setBorrando] = useState(false);
+// Tecnologías que se muestran en la franja de confianza
+const stack = [
+  { nombre: 'React', icono: devicon('react') },
+  { nombre: 'JavaScript', icono: devicon('javascript') },
+  { nombre: 'HTML5', icono: devicon('html5') },
+  { nombre: 'CSS3', icono: devicon('css3') },
+  { nombre: 'Git', icono: devicon('git') },
+];
 
-  // Efecto máquina de escribir
-  useEffect(() => {
-    if (!listo) return;
-    const completo = roles[rolIndex];
-    let delay = borrando ? 35 : 75;
+const cifras = [
+  { valor: '3', texto: 'Proyectos desarrollados' },
+  { valor: '8', texto: 'Certificaciones' },
+  { valor: '100%', texto: 'Diseño responsive' },
+];
 
-    if (!borrando && texto === completo) delay = 1800;
-    if (borrando && texto === '') delay = 300;
-
-    const t = setTimeout(() => {
-      if (!borrando && texto === completo) {
-        setBorrando(true);
-      } else if (borrando && texto === '') {
-        setBorrando(false);
-        setRolIndex((i) => (i + 1) % roles.length);
-      } else {
-        setTexto(completo.slice(0, texto.length + (borrando ? -1 : 1)));
-      }
-    }, delay);
-    return () => clearTimeout(t);
-  }, [texto, borrando, rolIndex, listo]);
-
+const Banner = () => {
   return (
-    <section id="inicio" className={`hero-section ${listo ? 'hero--ready' : ''}`}>
-      <NeuralCanvas />
-      <div className="hero-glow hero-glow--1" />
-      <div className="hero-glow hero-glow--2" />
-
-      <div className="hero-content container">
+    <section id="inicio" className="hero">
+      <div className="container hero-grid">
         {/* ===== Columna de texto ===== */}
         <div className="hero-text">
-          {/* 1. Etiqueta de Estado (Badge) */}
-          <div className="status-badge hero-anim" style={{ '--i': 0 }}>
-            <span className="status-dot"></span>
+          <span className="hero-badge hero-anim" style={{ '--i': 0 }}>
+            <span className="hero-badge-dot" />
             Disponible para nuevos proyectos
-          </div>
+          </span>
 
-          <p className="hero-hello hero-anim" style={{ '--i': 1 }}>
-            <span className="text-cyan">&gt;</span> Hola mundo, soy
-          </p>
-
-          {/* 2. Título Principal */}
-          <h1 className="hero-title hero-anim" style={{ '--i': 2 }}>
-            Thair <span className="text-gradient">Bazan</span>
+          <h1 className="hero-title hero-anim" style={{ '--i': 1 }}>
+            Páginas web profesionales que hacen <span className="text-gradient">crecer tu negocio</span>
           </h1>
 
-          {/* 3. Subtítulo (Rol con efecto de escritura) */}
-          <h2 className="hero-subtitle hero-anim" style={{ '--i': 3 }}>
-            <span className="hero-subtitle-prefix">~/</span>
-            <span className="hero-typed">{texto}</span>
-            <span className="hero-caret" aria-hidden="true" />
-          </h2>
-
-          {/* 4. Descripción */}
-          <p className="hero-description hero-anim" style={{ '--i': 4 }}>
-            Estudiante de <strong>Ingeniería de Software con Inteligencia Artificial</strong>.
-            Desarrollo páginas y aplicaciones web funcionales que resuelven necesidades
-            reales, cuidando el diseño, el rendimiento y la experiencia de usuario.
+          <p className="hero-lead hero-anim" style={{ '--i': 2 }}>
+            Soy <strong>Thair Bazan</strong>, desarrollador web en Lima. Diseño y desarrollo
+            sitios web, tiendas online y landing pages para empresas y emprendimientos:
+            rápidos, adaptados a celulares y pensados para atraer clientes.
           </p>
 
-          {/* 5. Botones de Acción */}
-          <div className="hero-buttons hero-anim" style={{ '--i': 5 }}>
-            <a href="#proyectos" className="btn btn-primary">
-              Ver Proyectos
+          <div className="hero-actions hero-anim" style={{ '--i': 3 }}>
+            <a href="#contacto" className="btn btn-primary">
+              Solicitar cotización
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
             </a>
-            <a href="#contacto" className="btn btn-ghost">Contáctame</a>
-            <div className="hero-socials">
-              {redes.map(({ nombre, url, Logo, clase }) => (
-                <a key={nombre} href={url} target="_blank" rel="noopener noreferrer" className={`hero-social ${clase}`} aria-label={nombre} title={nombre}>
-                  <Logo size={21} />
+            <a href="#proyectos" className="btn btn-ghost">Ver proyectos</a>
+          </div>
+
+          <div className="hero-stack hero-anim" style={{ '--i': 4 }}>
+            <span className="hero-stack-label">Trabajo con</span>
+            <ul>
+              {stack.map((t) => (
+                <li key={t.nombre} title={t.nombre}>
+                  <img src={t.icono} alt={t.nombre} width="22" height="22" />
+                </li>
+              ))}
+            </ul>
+            <span className="hero-stack-sep" aria-hidden="true" />
+            <div className="hero-redes">
+              {redes.map(({ nombre, url, Logo }) => (
+                <a key={nombre} href={url} target="_blank" rel="noopener noreferrer" aria-label={nombre} title={nombre}>
+                  <Logo size={18} />
                 </a>
               ))}
             </div>
           </div>
-
-          {/* 6. Mini estadísticas */}
-          <ul className="hero-stats hero-anim" style={{ '--i': 6 }}>
-            <li><strong>8+</strong><span>Certificaciones</span></li>
-            <li><strong>10</strong><span>Tecnologías</span></li>
-            <li><strong>3</strong><span>Proyectos</span></li>
-          </ul>
         </div>
 
-        {/* ===== Columna visual: foto + elementos flotantes ===== */}
-        <div className="hero-visual hero-anim" style={{ '--i': 3 }}>
-          <div className="profile-orbit">
-            <div className="profile-ring" />
-            <div className="profile-photo-container">
-              <img src={miFoto} alt="Foto de Thair Bazan Becerra" className="profile-photo" />
-            </div>
-
-            <span className="floating-chip chip-1">
-              <img src={devicon('react')} alt="" width="18" height="18" /> React
-            </span>
-            <span className="floating-chip chip-2">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#ia-grad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <defs>
-                  <linearGradient id="ia-grad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0" stopColor="#22d3ee" />
-                    <stop offset="1" stopColor="#a78bfa" />
-                  </linearGradient>
-                </defs>
-                <rect x="4" y="4" width="16" height="16" rx="2" /><rect x="9" y="9" width="6" height="6" />
-                <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3" />
-              </svg>
-              IA / ML
-            </span>
-            <span className="floating-chip chip-3">
-              <img src={devicon('python')} alt="" width="18" height="18" /> Python
-            </span>
-            <span className="floating-chip chip-4">
-              <img src={devicon('javascript')} alt="" width="18" height="18" /> JavaScript
-            </span>
+        {/* ===== Columna visual ===== */}
+        <div className="hero-visual hero-anim" style={{ '--i': 2 }}>
+          <div className="hero-photo">
+            <img src={miFoto} alt="Thair Bazan Becerra, desarrollador web" />
           </div>
 
-          {/* Tarjeta de código flotante */}
-          <div className="code-card">
-            <div className="code-card-head">
-              <span /><span /><span />
-              <em>thair.js</em>
+          <div className="hero-card hero-card--proyecto">
+            <span className="hero-card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+            </span>
+            <div>
+              <strong>TLS Regalos Perú</strong>
+              <span>Tienda online publicada</span>
             </div>
-            <pre>
-              <code>
-                <span className="tk-key">const</span> <span className="tk-var">dev</span> = {'{'}{'\n'}
-                {'  '}rol: <span className="tk-str">'Software Engineer'</span>,{'\n'}
-                {'  '}foco: <span className="tk-str">'IA + Web'</span>,{'\n'}
-                {'  '}cafe: <span className="tk-num">Infinity</span>{'\n'}
-                {'}'};
-              </code>
-            </pre>
+          </div>
+
+          <div className="hero-card hero-card--ubicacion">
+            <span className="hero-card-icon hero-card-icon--blue">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" /><line x1="12" y1="18" x2="12.01" y2="18" /></svg>
+            </span>
+            <div>
+              <strong>Celular, tablet y PC</strong>
+              <span>Webs 100% adaptables</span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* 7. Indicador de Scroll */}
-      <a href="#sobre-mi" className="scroll-indicator" aria-label="Bajar a la sección de perfil">
-        <span className="scroll-mouse"><span className="scroll-wheel" /></span>
-        <span className="scroll-text">scroll</span>
-      </a>
+      {/* Cifras */}
+      <div className="container">
+        <ul className="hero-cifras hero-anim" style={{ '--i': 5 }}>
+          {cifras.map((c) => (
+            <li key={c.texto}>
+              <strong>{c.valor}</strong>
+              <span>{c.texto}</span>
+            </li>
+          ))}
+          <li>
+            <strong>Lima</strong>
+            <span>Perú · Atención remota</span>
+          </li>
+        </ul>
+      </div>
     </section>
   );
 };

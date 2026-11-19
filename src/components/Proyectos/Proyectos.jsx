@@ -9,9 +9,9 @@ const proyectosData = [
   {
     id: 1,
     imagen: imgTLS,
-    titulo: 'Tienda Web - TLS Regalos Perú',
-    categoria: 'E-commerce',
-    descripcion: 'Tienda web de regalos personalizados: photobooks, cuadros y boxes. Catálogo visual, diseño responsivo y despliegue en Vercel.',
+    titulo: 'Tienda Online - TLS Regalos Perú',
+    categoria: 'Proyecto para cliente · E-commerce',
+    descripcion: 'El negocio necesitaba mostrar sus regalos personalizados (photobooks, cuadros y boxes) fuera de redes sociales. Desarrollé una tienda web con catálogo visual, diseño adaptado a celulares y publicación en Vercel.',
     tecnologias: ['HTML5', 'CSS3', 'JavaScript'],
     linkDemo: 'https://true-love-store-web.vercel.app',
     linkCodigo: 'https://github.com/thairwazan20-cmd/TRUE-LOVE-STORE-_WEB',
@@ -21,9 +21,9 @@ const proyectosData = [
     id: 2,
     imagen: imgPortafolio,
     titulo: 'Portafolio Web Personal',
-    categoria: 'React SPA',
-    descripcion: 'Portafolio profesional con tema oscuro, cursor personalizado, animaciones y fondo de red neuronal, construido con componentes de React.',
-    tecnologias: ['React', 'Vite', 'CSS3', 'Grid', 'Flexbox'],
+    categoria: 'Sitio web profesional · React',
+    descripcion: 'Este mismo sitio: presentación de servicios, proyectos y experiencia, con diseño responsive, formulario de contacto conectado a correo y WhatsApp, y publicación en Vercel.',
+    tecnologias: ['React', 'Vite', 'CSS3', 'Vercel'],
     linkDemo: 'https://portafolio-one-beige-65.vercel.app',
     linkCodigo: 'https://github.com/thairwazan20-cmd/portafolio',
     url: 'portafolio-one-beige-65.vercel.app',
@@ -32,9 +32,9 @@ const proyectosData = [
     id: 3,
     imagen: imgMatricula,
     titulo: 'Sistema de Matrícula',
-    categoria: 'App React',
-    descripcion: 'Directorio de alumnos con estado dinámico usando props y useState para gestionar las matrículas.',
-    tecnologias: ['React', 'useState', 'Bootstrap'],
+    categoria: 'Proyecto académico · App web',
+    descripcion: 'Directorio de alumnos para gestionar matrículas, con datos que se actualizan al instante gracias a los componentes y el estado de React.',
+    tecnologias: ['React', 'Bootstrap', 'JavaScript'],
     linkDemo: '#',
     linkCodigo: '#',
     url: 'matricula.app',
@@ -76,12 +76,12 @@ const Proyectos = () => {
     <section id="proyectos" className="section proyectos-section">
       <div className="container">
         <div className="section-head reveal">
-          <span className="section-eyebrow">04 · Proyectos</span>
+          <span className="section-eyebrow">Portafolio</span>
           <h2 className="section-title">
             Proyectos <span className="text-gradient">destacados</span>
           </h2>
           <p className="section-subtitle">
-            Una selección de trabajos reales y prácticos donde aplico lo que aprendo.
+            Trabajos para clientes y proyectos propios: cada uno resuelve una necesidad real.
           </p>
         </div>
 

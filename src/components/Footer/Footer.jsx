@@ -19,9 +19,9 @@ const Footer = () => {
         <div className="container footer-inner">
           <div className="footer-brand">
             <a href="#inicio" className="footer-logo">
-              <span className="text-dim">&lt;</span>Thair<span className="text-cyan">.dev</span><span className="text-dim">/&gt;</span>
+              Thair Bazan
             </a>
-            <p>Software Engineer &amp; AI · Lima, Perú</p>
+            <p>Desarrollo web para empresas · Lima, Perú</p>
           </div>
 
           <div className="footer-center">
@@ -41,7 +41,7 @@ const Footer = () => {
               ))}
             </div>
             <p className="footer-copy">
-              © {anio} {NOMBRE_COMPLETO}. Hecho con <span className="text-gradient">React + Vite</span>.
+              © {anio} {NOMBRE_COMPLETO}. Todos los derechos reservados.
             </p>
           </div>
 

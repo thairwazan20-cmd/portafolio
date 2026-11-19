@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import './Navbar.css';
 
 const enlaces = [
-  { id: 'sobre-mi', texto: 'Perfil', num: '01' },
-  { id: 'experiencia', texto: 'Experiencia', num: '02' },
-  { id: 'tech-stack', texto: 'Tech Stack', num: '03' },
-  { id: 'proyectos', texto: 'Proyectos', num: '04' },
-  { id: 'certificados', texto: 'Certificados', num: '05' },
-  { id: 'contacto', texto: 'Contacto', num: '06' },
+  { id: 'servicios', texto: 'Servicios' },
+  { id: 'proyectos', texto: 'Proyectos' },
+  { id: 'sobre-mi', texto: 'Sobre mí' },
+  { id: 'experiencia', texto: 'Experiencia' },
+  { id: 'tech-stack', texto: 'Habilidades' },
+  { id: 'certificados', texto: 'Certificados' },
 ];
 
 const Navbar = () => {
@@ -59,10 +59,8 @@ const Navbar = () => {
       <nav className="navbar-inner">
         {/* Logo */}
         <a href="#inicio" className="navbar-logo" onClick={() => setIsOpen(false)}>
-          <span className="logo-bracket">&lt;</span>
-          <span className="logo-name">Thair</span>
-          <span className="logo-dot">.dev</span>
-          <span className="logo-bracket">/&gt;</span>
+          <span className="logo-mark">TB</span>
+          <span className="logo-name">Thair Bazan</span>
         </a>
 
         {/* Enlaces de Navegación */}
@@ -74,12 +72,11 @@ const Navbar = () => {
               className={activo === link.id ? 'active' : ''}
               onClick={() => setIsOpen(false)}
             >
-              <span className="link-num">{link.num}.</span>
               {link.texto}
             </a>
           ))}
           <a href="#contacto" className="navbar-cta" onClick={() => setIsOpen(false)}>
-            Hablemos
+            Contáctame
           </a>
         </div>
 

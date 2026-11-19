@@ -1,12 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
-import Preloader from './components/Preloader/Preloader';
-import Cursor from './components/Cursor/Cursor';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Banner from './components/Banner/Banner';
+import Servicios from './components/Servicios/Servicios';
+import Proyectos from './components/Proyectos/Proyectos';
 import Perfil from './components/Perfil/Perfil';
 import Experiencia from './components/Experiencia/Experiencia';
 import Habilidades from './components/Habilidades/Habilidades';
-import Proyectos from './components/Proyectos/Proyectos';
 import Certificados from './components/Certificados/Certificados';
 import Contacto from './components/Contacto/Contacto';
 import Footer from './components/Footer/Footer';
@@ -14,13 +13,8 @@ import './index.css';
 import './App.css';
 
 function App() {
-  const [cargando, setCargando] = useState(true);
-  const terminarCarga = useCallback(() => setCargando(false), []);
-
   // 1. Animaciones al hacer scroll: añade .is-visible a cada elemento .reveal
   useEffect(() => {
-    if (cargando) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -35,9 +29,9 @@ function App() {
 
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, [cargando]);
+  }, []);
 
-  // 2. Brillo que sigue al mouse en todas las tarjetas .glow-card
+  // 2. Brillo suave que sigue al mouse en las tarjetas .glow-card
   useEffect(() => {
     const moverBrillo = (e) => {
       const card = e.target.closest?.('.glow-card');
@@ -52,15 +46,14 @@ function App() {
 
   return (
     <>
-      {cargando && <Preloader onFinish={terminarCarga} />}
-      <Cursor />
       <Navbar />
       <main>
-        <Banner listo={!cargando} />
+        <Banner />
+        <Servicios />
+        <Proyectos />
         <Perfil />
         <Experiencia />
         <Habilidades />
-        <Proyectos />
         <Certificados />
         <Contacto />
       </main>

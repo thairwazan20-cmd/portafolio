@@ -78,12 +78,13 @@ const Contacto = () => {
     <section id="contacto" className="section contacto-section">
       <div className="container">
         <div className="section-head center reveal">
-          <span className="section-eyebrow">06 · Contacto</span>
+          <span className="section-eyebrow">Contacto</span>
           <h2 className="section-title">
             Trabajemos <span className="text-gradient">juntos</span>
           </h2>
           <p className="section-subtitle">
-            ¿Tienes un proyecto en mente o necesitas ayuda con tu página web? Me encantaría escucharte.
+            ¿Tu negocio necesita una página web o mejorar la que ya tiene? Cuéntame tu idea
+            y te respondo con una propuesta sin compromiso.
           </p>
         </div>
 
@@ -92,18 +93,13 @@ const Contacto = () => {
               COLUMNA IZQUIERDA: INFORMACIÓN
           ====================================== */}
           <div className="contacto-info reveal">
-            <div className="info-terminal">
-              <div className="info-terminal-bar">
-                <span /><span /><span />
-                <em>contacto.sh</em>
-              </div>
-              <div className="info-terminal-body">
-                <p><span className="prompt">$</span> whoami</p>
-                <p className="out">Thair Bazan Becerra · Software Engineer &amp; AI</p>
-                <p><span className="prompt">$</span> status</p>
-                <p className="out ok">● Abierto a prácticas, freelance y colaboraciones</p>
-                <p><span className="prompt">$</span> <span className="cursor-blink">_</span></p>
-              </div>
+            <div className="info-intro">
+              <span className="info-intro-estado"><i /> Disponible para nuevos proyectos</span>
+              <h3>Hablemos de tu proyecto</h3>
+              <p>
+                Disponible para proyectos freelance, prácticas profesionales y colaboraciones
+                con empresas y emprendimientos.
+              </p>
             </div>
 
             <div className="info-items">

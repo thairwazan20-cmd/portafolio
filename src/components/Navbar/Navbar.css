@@ -50,19 +50,27 @@
 
 /* ---------- Logo ---------- */
 .navbar-logo {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 1.15rem;
-  letter-spacing: -0.02em;
   display: inline-flex;
   align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+.logo-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  font-size: 0.85rem;
+  color: #fff;
+  background: var(--gradient);
   transition: transform 0.3s var(--ease);
 }
-.navbar-logo:hover { transform: scale(1.04); }
-.logo-bracket { color: var(--text-dim); transition: color 0.3s; }
+.navbar-logo:hover .logo-mark { transform: rotate(-6deg); }
 .logo-name { color: var(--text); }
-.logo-dot { color: var(--cyan); }
-.navbar-logo:hover .logo-bracket { color: var(--violet); }
 
 /* ---------- Enlaces ---------- */
 .navbar-links {
@@ -79,12 +87,6 @@
   color: var(--text-muted);
   border-radius: 999px;
   transition: color 0.3s, background 0.3s;
-}
-.link-num {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--cyan);
-  margin-right: 6px;
 }
 .navbar-links a:not(.navbar-cta)::after {
   content: '';
@@ -106,16 +108,17 @@
 .navbar-links .navbar-cta {
   margin-left: 10px;
   padding: 9px 20px;
-  color: var(--cyan);
-  border: 1px solid rgba(34, 211, 238, 0.5);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  color: #fff;
+  background: var(--accent-strong);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.3s var(--ease);
 }
 .navbar-links .navbar-cta:hover {
-  background: var(--cyan);
-  color: var(--bg);
-  box-shadow: 0 0 24px -4px var(--cyan);
+  color: #fff;
+  background: var(--accent);
+  transform: translateY(-1px);
 }
 
 /* ---------- Hamburguesa ---------- */

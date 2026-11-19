@@ -5,51 +5,34 @@
   align-items: start;
 }
 
-/* ---------- Terminal ---------- */
-.info-terminal {
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: rgba(10, 14, 24, 0.8);
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
-  margin-bottom: 18px;
+/* ---------- Introducción ---------- */
+.info-intro {
+  margin-bottom: 22px;
 }
-.info-terminal-bar {
-  display: flex;
+.info-intro-estado {
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 11px 16px;
-  border-bottom: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--green);
 }
-.info-terminal-bar span {
-  width: 10px;
-  height: 10px;
+.info-intro-estado i {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: #ff5f57;
+  background: var(--green);
+  animation: pulse-dot 2.4s infinite;
 }
-.info-terminal-bar span:nth-child(2) { background: #febc2e; }
-.info-terminal-bar span:nth-child(3) { background: #28c840; }
-.info-terminal-bar em {
-  margin-left: auto;
-  font-style: normal;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-dim);
+.info-intro h3 {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
 }
-.info-terminal-body {
-  padding: 18px 20px;
-  font-family: var(--font-mono);
-  font-size: 0.84rem;
-  line-height: 1.9;
-  color: var(--text);
-}
-.info-terminal-body .prompt { color: var(--violet); margin-right: 6px; }
-.info-terminal-body .out { color: var(--text-muted); padding-left: 16px; }
-.info-terminal-body .ok { color: var(--green); }
-.cursor-blink {
-  color: var(--cyan);
-  animation: blink 1s steps(1) infinite;
+.info-intro p {
+  margin-top: 8px;
+  color: var(--text-muted);
 }
 
 /* ---------- Ítems de contacto ---------- */
@@ -69,10 +52,10 @@
 }
 .info-item.is-gmail { --brand: #ea4335; }
 .info-item.is-whatsapp { --brand: #25d366; }
-.info-item.is-phone { --brand: #22d3ee; }
+.info-item.is-phone { --brand: #60a5fa; }
 .info-item.is-linkedin { --brand: #0a66c2; }
 .info-item.is-github { --brand: #e6edf3; }
-.info-item.is-location { --brand: #a78bfa; }
+.info-item.is-location { --brand: #818cf8; }
 
 .info-item:hover {
   transform: translateX(6px);
@@ -236,8 +219,8 @@
 .form-group input:focus,
 .form-group textarea:focus {
   border-color: var(--cyan);
-  background: rgba(34, 211, 238, 0.04);
-  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.12);
+  background: rgba(96, 165, 250, 0.04);
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.12);
 }
 
 .form-group input:focus + label,
@@ -253,7 +236,7 @@
   border-color: rgba(52, 211, 153, 0.45);
 }
 .form-group input:not(:placeholder-shown):not(:focus):invalid {
-  border-color: rgba(244, 114, 182, 0.6);
+  border-color: rgba(129, 140, 248, 0.6);
 }
 
 .char-count {

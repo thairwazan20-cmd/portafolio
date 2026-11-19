@@ -1,222 +1,81 @@
-import { useState } from 'react';
 import './Habilidades.css';
+import { devicon } from '../Iconos/Iconos';
 
-const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons';
-
-// Arreglo de datos: separamos la información de la interfaz gráfica
-const skillsData = [
+// Tecnologías agrupadas por área
+const grupos = [
   {
-    id: 1,
-    titulo: 'HTML5 y CSS3',
-    descripcion: 'Maquetación semántica, estilos modernos y diseño de páginas web.',
-    nivel: 'Avanzado',
-    botonTexto: 'EN PRÁCTICA',
-    estado: 'proceso',
-    icono: `${DEVICON}/html5/html5-original.svg`,
+    titulo: 'Desarrollo Frontend',
+    descripcion: 'Interfaces web modernas, rápidas y adaptadas a cualquier pantalla.',
+    items: [
+      { nombre: 'HTML5', detalle: 'Maquetación semántica', icono: devicon('html5') },
+      { nombre: 'CSS3', detalle: 'Grid, Flexbox y responsive', icono: devicon('css3') },
+      { nombre: 'JavaScript', detalle: 'Interactividad y lógica web', icono: devicon('javascript') },
+      { nombre: 'React', detalle: 'Componentes y Hooks', icono: devicon('react') },
+      { nombre: 'Bootstrap', detalle: 'Maquetación rápida', icono: devicon('bootstrap') },
+    ],
   },
   {
-    id: 2,
-    titulo: 'JavaScript',
-    descripcion: 'Lenguaje de programación interpretado, dialecto del estándar ECMAScript.',
-    nivel: 'Aprendizaje Activo',
-    botonTexto: 'EN PRÁCTICA',
-    estado: 'proceso',
-    icono: `${DEVICON}/javascript/javascript-original.svg`,
+    titulo: 'Herramientas y publicación',
+    descripcion: 'Flujo de trabajo ordenado, desde el código hasta la web publicada.',
+    items: [
+      { nombre: 'Git', detalle: 'Control de versiones', icono: devicon('git') },
+      { nombre: 'GitHub', detalle: 'Repositorios y colaboración', icono: devicon('github'), invertir: true },
+      { nombre: 'Vite', detalle: 'Entorno de desarrollo', icono: devicon('vitejs') },
+      { nombre: 'Vercel', detalle: 'Publicación de sitios web', icono: devicon('vercel'), invertir: true },
+      { nombre: 'VS Code', detalle: 'Editor de código', icono: devicon('vscode') },
+    ],
   },
   {
-    id: 3,
-    titulo: 'React',
-    descripcion: 'Construcción de interfaces de usuario modernas a partir de componentes.',
-    nivel: 'Aprendizaje Activo',
-    botonTexto: 'EN PRÁCTICA',
-    estado: 'proceso',
-    icono: `${DEVICON}/react/react-original.svg`,
-  },
-  {
-    id: 4,
-    titulo: 'useState (Hooks)',
-    descripcion: 'Interactividad y memoria en componentes: estado reactivo en React.',
-    nivel: 'Aprendizaje Activo',
-    botonTexto: 'COMPLETADO',
-    estado: 'completado',
-    icono: `${DEVICON}/react/react-original.svg`,
-  },
-  {
-    id: 5,
-    titulo: 'Bootstrap',
-    descripcion: 'Framework CSS para construir interfaces responsivas con rapidez.',
-    nivel: 'Aprendizaje Activo',
-    botonTexto: 'COMPLETADO',
-    estado: 'completado',
-    icono: `${DEVICON}/bootstrap/bootstrap-original.svg`,
-  },
-  {
-    id: 6,
-    titulo: 'Git',
-    descripcion: 'Sistema de control de versiones.',
-    nivel: 'Aprendizaje Activo',
-    botonTexto: 'EN PRÁCTICA',
-    estado: 'proceso',
-    icono: `${DEVICON}/git/git-original.svg`,
-  },
-  {
-    id: 7,
-    titulo: 'GitHub',
-    descripcion: 'Repositorio en la nube y colaboración en proyectos.',
-    nivel: 'Aprendizaje Activo',
-    botonTexto: 'EN PRÁCTICA',
-    estado: 'proceso',
-    icono: `${DEVICON}/github/github-original.svg`,
-    invertir: true,
-  },
-  {
-    id: 8,
-    titulo: 'CSS Grid',
-    descripcion: 'Construcción de rejillas responsivas en dos dimensiones.',
-    nivel: 'Aprendizaje Activo',
-    botonTexto: 'COMPLETADO',
-    estado: 'completado',
-    icono: `${DEVICON}/css3/css3-original.svg`,
-  },
-  {
-    id: 9,
-    titulo: 'Flexbox',
-    descripcion: 'Diseño unidimensional para compaginar elementos en filas o columnas.',
-    nivel: 'Aprendizaje Activo',
-    botonTexto: 'COMPLETADO',
-    estado: 'completado',
-    icono: `${DEVICON}/css3/css3-original.svg`,
-  },
-  {
-    id: 10,
-    titulo: 'Python',
-    descripcion: 'Base para ciencia de datos e Inteligencia Artificial (Fundamentos de Python 1).',
-    nivel: 'Aprendizaje Activo',
-    botonTexto: 'EN PRÁCTICA',
-    estado: 'proceso',
-    icono: `${DEVICON}/python/python-original.svg`,
+    titulo: 'Otros conocimientos',
+    descripcion: 'Formación complementaria certificada por Cisco y SENATI.',
+    items: [
+      { nombre: 'Python', detalle: 'Fundamentos de programación', icono: devicon('python') },
+      { nombre: 'Ciencia de datos', detalle: 'Introducción · Cisco' },
+      { nombre: 'Redes', detalle: 'Conceptos básicos · Cisco' },
+      { nombre: 'Ciberseguridad', detalle: 'Introducción · Cisco' },
+      { nombre: 'Hardware y soporte', detalle: 'Diagnóstico de equipos' },
+    ],
   },
 ];
-
-// Porcentaje visual según el nivel declarado
-const porcentajeNivel = {
-  Avanzado: 85,
-  Intermedio: 70,
-  'Aprendizaje Activo': 55,
-};
-
-const filtros = [
-  { valor: 'todos', texto: 'Todos' },
-  { valor: 'completado', texto: 'Completado' },
-  { valor: 'proceso', texto: 'En práctica' },
-];
-
-const cinta = ['React', 'JavaScript', 'Python', 'Inteligencia Artificial', 'HTML5', 'CSS3', 'Git', 'GitHub', 'Vite', 'Bootstrap', 'Ciencia de Datos', 'Redes', 'IoT', 'Ciberseguridad'];
-
-// Efecto 3D: inclina la tarjeta según la posición del mouse
-const inclinar = (e) => {
-  const card = e.currentTarget;
-  const r = card.getBoundingClientRect();
-  const x = (e.clientX - r.left) / r.width - 0.5;
-  const y = (e.clientY - r.top) / r.height - 0.5;
-  card.style.transform = `perspective(800px) rotateX(${y * -8}deg) rotateY(${x * 8}deg) translateY(-6px)`;
-};
-const resetear = (e) => {
-  e.currentTarget.style.transform = '';
-};
 
 const Habilidades = () => {
-  const [filtro, setFiltro] = useState('todos');
-
-  const visibles = skillsData.filter((s) => filtro === 'todos' || s.estado === filtro);
-
   return (
     <section id="tech-stack" className="section habilidades-section">
       <div className="container">
-        <div className="section-head center reveal">
-          <span className="section-eyebrow">03 · Tech Stack</span>
+        <div className="section-head reveal">
+          <span className="section-eyebrow">Habilidades técnicas</span>
           <h2 className="section-title">
-            Herramientas con las que <span className="text-gradient">construyo</span>
+            Tecnologías con las que <span className="text-gradient">trabajo</span>
           </h2>
           <p className="section-subtitle">
-            Tecnologías que domino y practico a diario para crear productos digitales.
+            Herramientas actuales del desarrollo web para construir sitios rápidos,
+            seguros y fáciles de mantener.
           </p>
         </div>
 
-        {/* Filtros (estado con useState) */}
-        <div className="skills-filtros reveal" role="tablist">
-          {filtros.map((f) => (
-            <button
-              key={f.valor}
-              role="tab"
-              aria-selected={filtro === f.valor}
-              className={`filtro-btn ${filtro === f.valor ? 'active' : ''}`}
-              onClick={() => setFiltro(f.valor)}
-            >
-              {f.texto}
-              <span className="filtro-count">
-                {f.valor === 'todos' ? skillsData.length : skillsData.filter((s) => s.estado === f.valor).length}
-              </span>
-            </button>
-          ))}
-        </div>
-
-        {/* Iteramos sobre el arreglo de datos usando .map() */}
-        <div className="habilidades-grid reveal">
-          {visibles.map((skill, i) => (
-            <div
-              key={`${filtro}-${skill.id}`}
-              className="glow-card skill-card"
-              style={{ '--delay': `${i * 0.05}s` }}
-              onMouseMove={inclinar}
-              onMouseLeave={resetear}
-            >
-              {/* Cabecera de la tarjeta: Ícono y Badge */}
-              <div className="skill-header">
-                <div className="skill-icon">
-                  <img
-                    src={skill.icono}
-                    alt=""
-                    width="34"
-                    height="34"
-                    loading="lazy"
-                    className={skill.invertir ? 'invert' : ''}
-                  />
-                </div>
-
-                {/* Clases dinámicas: si el estado es 'proceso', aplicamos la variante amarilla */}
-                <span className={`skill-badge ${skill.estado === 'proceso' ? 'badge-yellow' : 'badge-green'}`}>
-                  {skill.botonTexto}
-                </span>
-              </div>
-
-              {/* Cuerpo de la tarjeta: Textos */}
-              <div className="skill-body">
-                <h3 className="skill-title">{skill.titulo}</h3>
-                <p className="skill-desc">{skill.descripcion}</p>
-              </div>
-
-              <div className="skill-level">
-                <div className="skill-level-top">
-                  <span>{skill.nivel}</span>
-                  <span>{porcentajeNivel[skill.nivel]}%</span>
-                </div>
-                <div className="skill-bar">
-                  <span style={{ width: `${porcentajeNivel[skill.nivel]}%` }} />
-                </div>
-              </div>
+        <div className="stack-grupos">
+          {grupos.map((g, i) => (
+            <div key={g.titulo} className="glow-card stack-grupo reveal" style={{ '--delay': `${i * 0.1}s` }}>
+              <h3>{g.titulo}</h3>
+              <p className="stack-grupo-desc">{g.descripcion}</p>
+              <ul>
+                {g.items.map((item) => (
+                  <li key={item.nombre} className="stack-item">
+                    <span className="stack-icon">
+                      {item.icono ? (
+                        <img src={item.icono} alt="" width="24" height="24" loading="lazy" className={item.invertir ? 'invert' : ''} />
+                      ) : (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                      )}
+                    </span>
+                    <span className="stack-texto">
+                      <strong>{item.nombre}</strong>
+                      <span>{item.detalle}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Cinta infinita de tecnologías */}
-      <div className="marquee" aria-hidden="true">
-        <div className="marquee-track">
-          {[...cinta, ...cinta].map((t, i) => (
-            <span key={i} className="marquee-item">
-              {t} <em>✦</em>
-            </span>
           ))}
         </div>
       </div>

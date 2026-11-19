@@ -44,7 +44,7 @@ const Experiencia = () => {
     <section id="experiencia" className="section experiencia-section">
       <div className="container">
         <div className="section-head reveal">
-          <span className="section-eyebrow">02 · Experiencia</span>
+          <span className="section-eyebrow">Experiencia</span>
           <h2 className="section-title">
             Experiencia y <span className="text-gradient">habilidades</span>
           </h2>

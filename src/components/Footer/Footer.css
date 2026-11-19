@@ -22,7 +22,7 @@
 }
 
 .footer-logo {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.1rem;
 }
@@ -131,7 +131,7 @@
   flex-shrink: 0;
   border-radius: 50%;
   color: var(--cyan);
-  border: 1px solid rgba(34, 211, 238, 0.4);
+  border: 1px solid rgba(96, 165, 250, 0.4);
   transition: transform 0.35s var(--ease), background 0.3s, color 0.3s, box-shadow 0.3s;
 }
 .footer-top:hover {

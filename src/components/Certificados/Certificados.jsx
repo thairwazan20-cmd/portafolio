@@ -51,7 +51,7 @@ const Certificados = () => {
     <section id="certificados" className="section certificados-section">
       <div className="container">
         <div className="section-head center reveal">
-          <span className="section-eyebrow">05 · Certificaciones</span>
+          <span className="section-eyebrow">Certificaciones</span>
           <h2 className="section-title">
             Aprendizaje <span className="text-gradient">certificado</span>
           </h2>
