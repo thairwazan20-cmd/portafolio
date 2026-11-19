@@ -46,7 +46,7 @@ const servicios = [
 const educacion = [
   {
     titulo: 'Ingeniería de Software con IA',
-    lugar: 'Estudios universitarios',
+    lugar: 'SENATI',
     badge: 'En curso',
     activo: true,
   },
@@ -154,7 +154,8 @@ const Perfil = () => {
             <div className="card-text">
               <p>
                 Soy <strong>Thair Bazan Becerra</strong>, estudiante de
-                <strong> Ingeniería de Software con Inteligencia Artificial</strong>.
+                <strong> Ingeniería de Software con Inteligencia Artificial</strong> en
+                <strong> SENATI</strong>.
               </p>
               <p>
                 Tengo experiencia laboral en <span className="hl">atención al cliente</span> y
