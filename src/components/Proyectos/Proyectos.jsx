@@ -24,9 +24,9 @@ const proyectosData = [
     categoria: 'React SPA',
     descripcion: 'Portafolio profesional con tema oscuro, cursor personalizado, animaciones y fondo de red neuronal, construido con componentes de React.',
     tecnologias: ['React', 'Vite', 'CSS3', 'Grid', 'Flexbox'],
-    linkDemo: '#',
+    linkDemo: 'https://portafolio-one-beige-65.vercel.app',
     linkCodigo: 'https://github.com/thairwazan20-cmd/portafolio',
-    url: 'thair.dev',
+    url: 'portafolio-one-beige-65.vercel.app',
   },
   {
     id: 3,
