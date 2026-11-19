@@ -1,38 +1,43 @@
 /* =========================================================
-   SISTEMA DE DISEÑO — Thair Bazan · Software Engineer & AI
-   Variables globales, tipografía, fondo, utilidades y animaciones
+   SISTEMA DE DISEÑO — Thair Bazan · Paleta "Atardecer"
+   Alegre, creativo y lleno de ideas: violeta, fucsia, naranja y amarillo
 ========================================================= */
 :root {
-  /* Colores base */
-  --bg: #0a0d14;
-  --bg-2: #0f131c;
-  --surface: rgba(255, 255, 255, 0.03);
-  --surface-2: rgba(255, 255, 255, 0.055);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.14);
+  /* Colores base: noche violeta */
+  --bg: #0d0a17;
+  --bg-2: #151026;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-2: rgba(255, 255, 255, 0.065);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
 
   /* Texto */
-  --text: #eef1f6;
-  --text-muted: #9aa4b6;
-  --text-dim: #6b7487;
+  --text: #f6f1ff;
+  --text-muted: #b3a9c9;
+  --text-dim: #7d7396;
 
-  /* Acentos: un azul de marca + un tono de apoyo (sobrio, corporativo) */
-  --accent: #3b82f6;
-  --accent-strong: #2563eb;
-  --cyan: #60a5fa;
-  --violet: #93a5f5;
-  --pink: #93a5f5;
+  /* Acentos Atardecer */
+  --purple: #a855f7;
+  --pink: #ec4899;
+  --orange: #f97316;
+  --yellow: #facc15;
+  --accent: #c026d3;
+  --accent-strong: #9333ea;
+  --cyan: #f472b6;   /* acento principal de textos e íconos (rosa) */
+  --violet: #c084fc; /* acento secundario (lila) */
   --green: #34d399;
-  --yellow: #fbbf24;
-  --gradient: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
-  --gradient-text: linear-gradient(120deg, #93c5fd 0%, #a5b4fc 100%);
 
-  /* Sombras y brillos */
+  --gradient: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f97316 100%);
+  --gradient-text: linear-gradient(110deg, #c084fc 0%, #f472b6 30%, #fb923c 60%, #facc15 80%, #c084fc 100%);
+
+  /* Sombras y brillos de colores */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
-  --shadow-md: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 14px 34px -10px rgba(0, 0, 0, 0.65);
   --shadow-lg: 0 30px 60px -15px rgba(0, 0, 0, 0.75);
-  --glow-cyan: 0 0 0 1px rgba(96, 165, 250, 0.3), 0 10px 30px -14px rgba(59, 130, 246, 0.45);
-  --glow-violet: 0 0 0 1px rgba(147, 165, 245, 0.3), 0 10px 30px -14px rgba(99, 102, 241, 0.45);
+  --glow-pink: 0 0 0 1px rgba(236, 72, 153, 0.35), 0 18px 50px -12px rgba(236, 72, 153, 0.55);
+  --glow-purple: 0 0 0 1px rgba(168, 85, 247, 0.35), 0 18px 50px -12px rgba(168, 85, 247, 0.55);
+  --glow-cyan: var(--glow-pink);
+  --glow-violet: var(--glow-purple);
 
   /* Tipografía */
   --font-display: 'Space Grotesk', system-ui, sans-serif;
@@ -40,7 +45,7 @@
   --font-mono: 'Inter', system-ui, sans-serif;
 
   /* Layout */
-  --radius: 14px;
+  --radius: 18px;
   --radius-sm: 10px;
   --container: 1180px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -68,31 +73,75 @@ body {
   overflow-x: hidden;
 }
 
-/* Fondo global: rejilla técnica + manchas de luz */
+/* Puntitos de luz (como estrellas / chispas de ideas) */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -2;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 30%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 30%, transparent 100%);
+    radial-gradient(1.5px 1.5px at 20% 30%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 70% 20%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1.5px 1.5px at 40% 80%, rgba(250, 204, 21, 0.5), transparent),
+    radial-gradient(1px 1px at 85% 65%, rgba(244, 114, 182, 0.6), transparent),
+    radial-gradient(1px 1px at 10% 75%, rgba(192, 132, 252, 0.6), transparent);
+  background-size: 420px 420px;
+  animation: titilar 6s ease-in-out infinite alternate;
   pointer-events: none;
 }
+@keyframes titilar {
+  from { opacity: 0.45; }
+  to { opacity: 1; }
+}
 
-body::after {
-  content: '';
+/* =========================================================
+   AURORA: manchas de luz de colores que se mueven en el fondo
+========================================================= */
+.aurora {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background:
-    radial-gradient(700px circle at 15% 10%, rgba(59, 130, 246, 0.06), transparent 60%),
-    radial-gradient(700px circle at 90% 80%, rgba(99, 102, 241, 0.04), transparent 60%);
+  overflow: hidden;
   pointer-events: none;
 }
+.aurora span {
+  position: absolute;
+  width: 46vmax;
+  height: 46vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.22;
+  animation: aurora-mover 26s ease-in-out infinite alternate;
+}
+.aurora span:nth-child(1) { background: #8b5cf6; top: -18%; left: -12%; }
+.aurora span:nth-child(2) { background: #ec4899; top: 30%; right: -18%; animation-delay: -8s; animation-duration: 30s; }
+.aurora span:nth-child(3) { background: #f97316; bottom: -25%; left: 20%; opacity: 0.14; animation-delay: -14s; animation-duration: 34s; }
+@keyframes aurora-mover {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(8vw, 6vh) scale(1.15); }
+  100% { transform: translate(-6vw, -4vh) scale(0.95); }
+}
+
+/* Luz que sigue al mouse por toda la página */
+.luz-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 0;
+  width: 520px;
+  height: 520px;
+  margin: -260px 0 0 -260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.13), rgba(168, 85, 247, 0.06) 40%, transparent 70%);
+  transform: translate(var(--cx, -999px), var(--cy, -999px));
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+@media (hover: none) {
+  .luz-cursor { display: none; }
+}
+
+main, footer { position: relative; z-index: 1; }
 
 img {
   max-width: 100%;
@@ -112,15 +161,15 @@ textarea {
 }
 
 ::selection {
-  background: rgba(59, 130, 246, 0.35);
+  background: rgba(236, 72, 153, 0.45);
   color: #fff;
 }
 
-/* Scrollbar personalizada */
+/* Scrollbar con degradado */
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
-  background: #2a3242;
+  background: linear-gradient(#8b5cf6, #ec4899, #f97316);
   border-radius: 10px;
   border: 2px solid var(--bg);
 }
@@ -142,14 +191,20 @@ textarea {
 
 .text-cyan { color: var(--cyan); }
 
+/* Texto con degradado animado */
 .text-gradient {
   background: var(--gradient-text);
+  background-size: 250% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: degradado-mover 8s linear infinite;
+}
+@keyframes degradado-mover {
+  to { background-position: 250% center; }
 }
 
-/* Encabezado de sección:  01. // Título  */
+/* Encabezado de sección */
 .section-head {
   margin-bottom: 64px;
   max-width: 680px;
@@ -163,25 +218,28 @@ textarea {
 .section-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
+  gap: 8px;
+  padding: 6px 14px;
   font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--cyan);
-  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(236, 72, 153, 0.25));
+  border: 1px solid rgba(236, 72, 153, 0.35);
+  box-shadow: 0 0 24px -6px rgba(236, 72, 153, 0.5);
 }
 .section-eyebrow::before {
-  content: '';
-  width: 28px;
-  height: 1px;
-  background: var(--gradient);
+  content: '✦';
+  color: var(--yellow);
+  font-size: 0.9em;
 }
 
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+  font-size: clamp(2.1rem, 4.5vw, 3.3rem);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -194,7 +252,9 @@ textarea {
   font-size: 1.05rem;
 }
 
-/* Botones */
+/* =========================================================
+   BOTONES
+========================================================= */
 .btn {
   position: relative;
   display: inline-flex;
@@ -202,7 +262,7 @@ textarea {
   justify-content: center;
   gap: 10px;
   padding: 14px 28px;
-  border-radius: 10px;
+  border-radius: 999px;
   font-weight: 600;
   font-size: 0.95rem;
   border: 1px solid transparent;
@@ -214,23 +274,28 @@ textarea {
 .btn:hover svg { transform: translateX(4px); }
 
 .btn-primary {
-  background: var(--accent-strong);
+  background: linear-gradient(135deg, #8b5cf6, #ec4899, #f97316, #8b5cf6);
+  background-size: 300% 100%;
   color: #fff;
-  box-shadow: 0 8px 24px -10px rgba(37, 99, 235, 0.8);
+  box-shadow: 0 10px 30px -8px rgba(236, 72, 153, 0.7);
+  animation: degradado-boton 6s ease infinite;
+}
+@keyframes degradado-boton {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 .btn-primary::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.18) 50%, transparent 80%);
+  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.4) 50%, transparent 80%);
   transform: translateX(-120%);
   transition: transform 0.7s var(--ease);
 }
 .btn-primary:hover {
-  transform: translateY(-2px);
-  background: var(--accent);
-  box-shadow: 0 14px 30px -12px rgba(37, 99, 235, 0.9);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 18px 44px -8px rgba(236, 72, 153, 0.85), 0 0 0 4px rgba(236, 72, 153, 0.15);
 }
 .btn-primary:hover::after { transform: translateX(120%); }
 
@@ -241,43 +306,62 @@ textarea {
   backdrop-filter: blur(10px);
 }
 .btn-ghost:hover {
-  transform: translateY(-2px);
-  border-color: rgba(96, 165, 250, 0.6);
+  transform: translateY(-3px);
+  border-color: rgba(250, 204, 21, 0.6);
+  box-shadow: 0 12px 34px -12px rgba(250, 204, 21, 0.5);
   background: var(--surface-2);
 }
 
-/* Tarjeta base con brillo que sigue al mouse (usa --mx / --my) */
+/* =========================================================
+   TARJETA BASE: luz que sigue al mouse + borde de colores
+========================================================= */
 .glow-card {
   position: relative;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
   overflow: hidden;
+  backdrop-filter: blur(6px);
   transition: transform 0.45s var(--ease), border-color 0.45s, box-shadow 0.45s;
 }
+/* Luz interior que sigue al mouse */
 .glow-card::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(96, 165, 250, 0.07), transparent 45%);
+  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), rgba(236, 72, 153, 0.16), rgba(168, 85, 247, 0.06) 40%, transparent 60%);
   opacity: 0;
   transition: opacity 0.4s;
   pointer-events: none;
 }
-.glow-card:hover::before { opacity: 1; }
+/* Borde de colores que aparece al pasar el mouse */
+.glow-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), #facc15, #ec4899 40%, #8b5cf6 70%, transparent 90%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.glow-card:hover::before,
+.glow-card:hover::after { opacity: 1; }
 .glow-card:hover {
-  border-color: rgba(96, 165, 250, 0.28);
-  box-shadow: var(--shadow-md);
+  border-color: transparent;
+  box-shadow: var(--shadow-lg), 0 0 50px -14px rgba(236, 72, 153, 0.55);
 }
 
 /* =========================================================
    ANIMACIONES DE APARICIÓN AL HACER SCROLL
    (App.jsx añade .is-visible con IntersectionObserver)
 ========================================================= */
-/* Se usa 'translate' (no 'transform') y una animación (no transition)
-   para no interferir con los efectos hover de cada tarjeta */
 .reveal {
   opacity: 0;
 }
@@ -285,8 +369,8 @@ textarea {
   animation: reveal-in 0.9s var(--ease) var(--delay, 0s) both;
 }
 @keyframes reveal-in {
-  from { opacity: 0; translate: 0 24px; }
-  to { opacity: 1; translate: none; }
+  from { opacity: 0; translate: 0 36px; scale: 0.97; }
+  to { opacity: 1; translate: none; scale: none; }
 }
 
 @keyframes float {
@@ -330,4 +414,5 @@ textarea {
 @media (max-width: 768px) {
   .section { padding: 90px 0; }
   .section-head { margin-bottom: 44px; }
+  .aurora span { filter: blur(70px); opacity: 0.18; }
 }

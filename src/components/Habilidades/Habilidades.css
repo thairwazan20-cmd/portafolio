@@ -71,3 +71,27 @@
 @media (max-width: 640px) {
   .stack-grupos { grid-template-columns: 1fr; }
 }
+
+/* ---------- Colores vivos por grupo ---------- */
+.stack-grupo { --c: #a855f7; border-top: 3px solid var(--c); }
+.stack-grupo:nth-child(2) { --c: #ec4899; }
+.stack-grupo:nth-child(3) { --c: #f97316; }
+.stack-grupo h3 { color: var(--text); }
+.stack-grupo h3::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 12px var(--c);
+}
+.stack-item:hover .stack-icon {
+  border-color: var(--c);
+  box-shadow: 0 0 20px -4px var(--c);
+}
+.stack-icon {
+  color: var(--c);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}

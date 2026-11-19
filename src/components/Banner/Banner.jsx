@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './Banner.css';
 import miFoto from '../../assets/miFoto.png';
 import { LogoGitHub, LogoLinkedIn, LogoWhatsApp, devicon } from '../Iconos/Iconos';
@@ -24,7 +25,17 @@ const cifras = [
   { valor: '100%', texto: 'Diseño responsive' },
 ];
 
+// Palabras que van cambiando en el título
+const palabras = ['enamoran', 'inspiran', 'venden', 'destacan', 'sorprenden'];
+
 const Banner = () => {
+  const [indice, setIndice] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setIndice((i) => (i + 1) % palabras.length), 2600);
+    return () => clearInterval(t);
+  }, []);
+
   return (
     <section id="inicio" className="hero">
       <div className="container hero-grid">
@@ -36,13 +47,17 @@ const Banner = () => {
           </span>
 
           <h1 className="hero-title hero-anim" style={{ '--i': 1 }}>
-            Páginas web profesionales que hacen <span className="text-gradient">crecer tu negocio</span>
+            Convierto ideas en páginas web que{' '}
+            <span className="hero-rotador">
+              <span key={indice} className="hero-palabra text-gradient">{palabras[indice]}</span>
+            </span>
           </h1>
 
           <p className="hero-lead hero-anim" style={{ '--i': 2 }}>
-            Soy <strong>Thair Bazan</strong>, desarrollador web en Lima. Diseño y desarrollo
-            sitios web, tiendas online y landing pages para empresas y emprendimientos:
-            rápidos, adaptados a celulares y pensados para atraer clientes.
+            Soy <strong>Thair Bazan</strong>, desarrollador web creativo en Lima 🚀. Diseño y
+            desarrollo sitios web, tiendas online y landing pages para empresas y
+            emprendimientos: llenos de color, rápidos, adaptados a celulares y pensados
+            para atraer clientes.
           </p>
 
           <div className="hero-actions hero-anim" style={{ '--i': 3 }}>
@@ -75,9 +90,16 @@ const Banner = () => {
 
         {/* ===== Columna visual ===== */}
         <div className="hero-visual hero-anim" style={{ '--i': 2 }}>
+          <div className="hero-anillo" aria-hidden="true" />
           <div className="hero-photo">
             <img src={miFoto} alt="Thair Bazan Becerra, desarrollador web" />
           </div>
+
+          {/* Burbujas de ideas alrededor de la foto */}
+          <span className="hero-idea hero-idea--1" aria-hidden="true">💡</span>
+          <span className="hero-idea hero-idea--2" aria-hidden="true">🎨</span>
+          <span className="hero-idea hero-idea--3" aria-hidden="true">🚀</span>
+          <span className="hero-idea hero-idea--4" aria-hidden="true">✨</span>
 
           <div className="hero-card hero-card--proyecto">
             <span className="hero-card-icon">

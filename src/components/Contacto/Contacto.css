@@ -52,10 +52,10 @@
 }
 .info-item.is-gmail { --brand: #ea4335; }
 .info-item.is-whatsapp { --brand: #25d366; }
-.info-item.is-phone { --brand: #60a5fa; }
+.info-item.is-phone { --brand: #f472b6; }
 .info-item.is-linkedin { --brand: #0a66c2; }
 .info-item.is-github { --brand: #e6edf3; }
-.info-item.is-location { --brand: #818cf8; }
+.info-item.is-location { --brand: #fb923c; }
 
 .info-item:hover {
   transform: translateX(6px);
@@ -219,8 +219,8 @@
 .form-group input:focus,
 .form-group textarea:focus {
   border-color: var(--cyan);
-  background: rgba(96, 165, 250, 0.04);
-  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.12);
+  background: rgba(236, 72, 153, 0.04);
+  box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.12);
 }
 
 .form-group input:focus + label,
@@ -236,7 +236,7 @@
   border-color: rgba(52, 211, 153, 0.45);
 }
 .form-group input:not(:placeholder-shown):not(:focus):invalid {
-  border-color: rgba(129, 140, 248, 0.6);
+  border-color: rgba(249, 115, 22, 0.6);
 }
 
 .char-count {

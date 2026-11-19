@@ -4,6 +4,7 @@ import Banner from './components/Banner/Banner';
 import Servicios from './components/Servicios/Servicios';
 import Proyectos from './components/Proyectos/Proyectos';
 import Perfil from './components/Perfil/Perfil';
+import Personalidad from './components/Personalidad/Personalidad';
 import Experiencia from './components/Experiencia/Experiencia';
 import Habilidades from './components/Habilidades/Habilidades';
 import Certificados from './components/Certificados/Certificados';
@@ -44,14 +45,36 @@ function App() {
     return () => window.removeEventListener('pointermove', moverBrillo);
   }, []);
 
+  // 3. Luz de colores que sigue al mouse por toda la página
+  useEffect(() => {
+    let frame = 0;
+    const moverLuz = (e) => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--cx', `${e.clientX}px`);
+        document.documentElement.style.setProperty('--cy', `${e.clientY}px`);
+      });
+    };
+    window.addEventListener('pointermove', moverLuz, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('pointermove', moverLuz);
+    };
+  }, []);
+
   return (
     <>
+      {/* Fondo de luces de colores */}
+      <div className="aurora" aria-hidden="true"><span /><span /><span /></div>
+      <div className="luz-cursor" aria-hidden="true" />
+
       <Navbar />
       <main>
         <Banner />
         <Servicios />
         <Proyectos />
         <Perfil />
+        <Personalidad />
         <Experiencia />
         <Habilidades />
         <Certificados />

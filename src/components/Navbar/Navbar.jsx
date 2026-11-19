@@ -5,6 +5,7 @@ const enlaces = [
   { id: 'servicios', texto: 'Servicios' },
   { id: 'proyectos', texto: 'Proyectos' },
   { id: 'sobre-mi', texto: 'Sobre mí' },
+  { id: 'personalidad', texto: 'Mi mundo' },
   { id: 'experiencia', texto: 'Experiencia' },
   { id: 'tech-stack', texto: 'Habilidades' },
   { id: 'certificados', texto: 'Certificados' },
